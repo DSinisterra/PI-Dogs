@@ -17,6 +17,7 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+const { DataTypes } = require('sequelize');
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
