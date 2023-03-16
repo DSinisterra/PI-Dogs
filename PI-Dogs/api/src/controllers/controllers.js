@@ -1,6 +1,8 @@
 const axios = require("axios");
 const { Dog, Temperament } = require("../db.js");
 
+/////////////////// Traer todos los perros de la Api a la BDD /////////////////////////////////////////////////////////
+
 const getDogsFromApi = async () => {
     try {
         let api = await axios.get('https://api.thedogapi.com/v1/breeds');
@@ -18,13 +20,24 @@ const getDogsFromApi = async () => {
                 temperament: dog.temperament
             }
         });
-        
-        let bdd = await Dog.findAll();
+        const bdd = await Dog.findAll();
         if (!bdd) {
             await Dog.findOrCreate(api)
         }
+        return bdd
+    } catch (error) {
+        throw new Error("Not information found")
+    }
+}
 
-        let dogsBdd = await Dog.findAll({
+
+/////// Traer todos los perros de la BDD con temperamentos ///////////////////////////////////////////////////////
+
+
+const getAllDogs = async () => {
+    try {
+
+        const dogsBdd = await Dog.findAll({
             include: {
                 model: Temperament,
                 attributes: ["name"],
@@ -33,8 +46,8 @@ const getDogsFromApi = async () => {
                 }
             }
         })
-
-        let dogsBddConTemp = dogsBdd.map((dog) => {
+    
+        const dogsBddConTemp = dogsBdd.map((dog) => {
             return {
                 id: dog.id,
                 name: dog.name,
@@ -48,35 +61,54 @@ const getDogsFromApi = async () => {
                 temperament: dog.temperament.map(temp => { return temp.name}).join(', ')
             }
         })
-        return temp;
+        return dogsBddConTemp;
     } catch (error) {
-        throw new Error("No se encontró la info")
+        throw new Error("Not information found")
     }
 }
+
+
+///////////////// Traer perros por ID ///////////////////////////////////////////////////////
 
 
 const getById = async (id) => {
     try {
-        return Dog.findByPk(id)
+        const allDogs = await getAllDogs();
+        const filtroId = allDogs.filter((dog) => dog.id == id);
+
+        if(filtroId.length > 0){
+            return filtroId[0]
+        } 
     } catch (error) {
-        console.error(error.messsage)
+        throw new Error(`Dog with ID ${id} not found`)
     }
+
 }
+
+
+
+///////////////// Traer perros por nombre ///////////////////////////////////////////////////////
+
 
 const getByName = async(name) => {
     try {
-        return Dog.findOne({where: {  name: {[Op.like]: '%name%'}}})
-    } catch (error) {
+        const allDogs = await getAllDogs();
+        const filtroName = allDogs.filter((dog) => dog.name.toLowerCase().includes(name.toLowerCase()));
         
+        if(filtroName.length > 0){
+            return filtroName
+        } 
+    } catch (error) {
+        throw new Error(`Dog with name ${name} not found`)
     }
 }
 
-const createDog = async (name, minWeight, maxWeight, minHeight, maxHeight, minLifeSpan, maxLifeSpan, image) => {
-    
-    const newDog = await Dog.create({name, minWeight, maxWeight, minHeight, maxHeight, minLifeSpan, maxLifeSpan, image});
 
-    return newDog
-}
+///////////////// Posteo de perros  ///////////////////////////////////////////////////////
+
+
+
+
 
 module.exports = {
     dogsBddConTemp,
