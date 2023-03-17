@@ -72,7 +72,7 @@ const getAllDogs = async () => {
 const getById = async (id) => {
     try {
         const allDogs = await getAllDogs();
-        let filtroId =  allDogs.filter((dog) => dog.id === id);
+        let filtroId =  allDogs.filter((dog) => dog.id === Number(id));
 
         if(filtroId.length > 0){
             return filtroId[0];
@@ -90,15 +90,12 @@ const getById = async (id) => {
 
 
 const getByName = async(name) => {
-    console.log(1);
+
     try {
         const allDogs = await getAllDogs();
         const filtroName = allDogs.filter((dog) => dog.name.toLowerCase().includes(name.toLowerCase()));
-        
-        console.log(2);
 
         if(filtroName.length > 0){
-            console.log(3);
             return filtroName
         } 
         throw new Error(`Dog with name ${name} not found`)
@@ -142,29 +139,29 @@ const createDog = async(name, minWeight, maxWeight, minHeight, maxHeight, minLif
 
 //////////////// Traer temperamentos ////////////////////////
 
-// const getTemperament = async () => {
-//     try {
-//         const fromApi = getDogsFromApi();
-//         const allTemperament = [];
+const getTemperament = async () => {
+    try {
+        const fromApi = getDogsFromApi();
+        const allTemperament = [];
 
-//         fromApi.map((dog) => {
-//             if(dog.temperament){
-//                 allTemperament.push(...dog.temperament.split(", "))
-//             }})
+        fromApi.map((dog) => {
+            if(dog.temperament){
+                allTemperament.push(...dog.temperament.split(", "))
+            }})
 
-//         allTemperament.map((temp) => {
-//             Temperament.findOrCreate({
-//                 where: {
-//                     name: temp
-//                 }
-//             })
-//         });
+        allTemperament.map((temp) => {
+            Temperament.findOrCreate({
+                where: {
+                    name: temp
+                }
+            })
+        });
 
-//         return allTemperament;
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+        return allTemperament;
+    } catch (error) {
+        throw new Error("Not information found")
+    }
+}
 
 module.exports = {
     getDogsFromApi,
@@ -172,5 +169,5 @@ module.exports = {
     getByName,
     getById,
     createDog,
-    // getTemperament
+    getTemperament
 }

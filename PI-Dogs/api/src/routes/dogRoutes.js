@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const {getAllDogs, getByName, getById, createDog, getTemperament, getDogsFromApi} = require("../controllers/controllers");
+const {getAllDogs, getByName, getById, createDog, getTemperament} = require("../controllers/controllers");
 
 //////////////// Ruta para traer todos los perros o por nombre/////////////////////////////////////////////
 
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const { name } = req.query;
     
     try {
-        // getTemperament();
+        getTemperament();
         if (name) {
             const byName = await getByName(name);
             res.status(200).send(byName)
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
 
     try {
         const byId = await getById(id);
@@ -52,18 +52,6 @@ router.post('/dogs', async (req, res) => {
     }
 })
 
-
-/////////////// Ruta para traer temperamentos //////////////////
-
-router.get('/temperaments', (req, res) => {
-    const {temperament} = req.query;
-    try {
-        const byTemperament = getTemperament(temperament);
-        res.status(200).send(byTemperament)
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
-})
 
 
 module.exports = router;

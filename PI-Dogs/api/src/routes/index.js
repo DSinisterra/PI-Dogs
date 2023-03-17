@@ -7,9 +7,9 @@ const tempRoutes = require('./temperamentRoutes')
 const router = Router();
 
 // Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+
 
 router.use("/dogs", dogRoutes);
-// router.use("/temperament", tempRoutes);
+router.use("/temperament", tempRoutes);
 
 module.exports = router;
