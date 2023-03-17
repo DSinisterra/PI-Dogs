@@ -3,7 +3,7 @@ const { Dog, Temperament } = require("../db.js");
 require("dotenv").config();
 const {API_KEY} = process.env;
 
-/////////////////// Traer todos los perros de la Api a la BDD /////////////////////////////////////////////////////////
+//////////////// Traer todos los perros de la Api a la BDD //////////////////
 
 const getDogsFromApi = async () => {
     try {
@@ -22,20 +22,22 @@ const getDogsFromApi = async () => {
                 temperament: dog.temperament
             }
         });
+
         return apiData;
+
     } catch (error) {
-        console.log(error)
+        throw new Error(error.message)
     }
 }
 
-
-/////// Traer todos los perros de la BDD con temperamentos ///////////////////////////////////////////////////////
+/////// Traer todos los perros de la BDD con temperamentos ////////////////
 
 
 const getAllDogs = async () => {
     try {
         const fromApi = await getDogsFromApi();
-        const dogsBdd = await Dog.findAll({
+
+        let dogsBdd = await Dog.findAll({
             include: {
                 model: Temperament,
                 attributes: ["name"],
@@ -61,13 +63,11 @@ const getAllDogs = async () => {
         })
         return [...fromApi, ...dogsBddConTemp];
     } catch (error) {
-        throw new Error("Not information found")
+        throw new Error(error.message);
     }
 }
 
-
-
-///////////////// Traer perros por ID ///////////////////////////////////////////////////////
+///////////////// Traer perros por ID ////////////////////
 
 const getById = async (id) => {
     try {
@@ -86,7 +86,7 @@ const getById = async (id) => {
 
 
 
-///////////////// Traer perros por nombre ///////////////////////////////////////////////////////
+///////////////// Traer perros por nombre /////////////////////
 
 
 const getByName = async(name) => {
@@ -105,7 +105,7 @@ const getByName = async(name) => {
 }
 
 
-///////////////// Posteo de perros  ///////////////////////////////////////////////////////
+///////////////// Posteo de perros  /////////////////
 
 const createDog = async(name, minWeight, maxWeight, minHeight, maxHeight, minLifeSpan, maxLifeSpan, image, temperament) => {
     try {
@@ -141,13 +141,14 @@ const createDog = async(name, minWeight, maxWeight, minHeight, maxHeight, minLif
 
 const getTemperament = async () => {
     try {
-        const fromApi = getDogsFromApi();
+        const fromApi = await getAllDogs();
         const allTemperament = [];
 
         fromApi.map((dog) => {
             if(dog.temperament){
                 allTemperament.push(...dog.temperament.split(", "))
-            }})
+            }
+        })
 
         allTemperament.map((temp) => {
             Temperament.findOrCreate({
@@ -156,10 +157,10 @@ const getTemperament = async () => {
                 }
             })
         });
-
+        
         return allTemperament;
     } catch (error) {
-        throw new Error("Not information found")
+        throw new Error(error)
     }
 }
 
