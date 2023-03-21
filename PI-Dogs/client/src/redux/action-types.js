@@ -1,0 +1,14 @@
+const GET_ALL_DOGS = 'GET_ALL_DOGS';
+const GET_BY_ID = 'GET_BY_ID';
+const GET_BY_NAME = 'GET_BY_NAME';
+const POST_DOG = 'POST_DOG';
+const GET_TEMPERAMENT = 'GET_TEMPERAMENT';
+
+
+export {
+    GET_ALL_DOGS,
+    GET_BY_ID,
+    GET_BY_NAME,
+    POST_DOG, 
+    GET_TEMPERAMENT
+}
