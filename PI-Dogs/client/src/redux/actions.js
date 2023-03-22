@@ -1,51 +1,119 @@
 import axios from 'axios';
-import {GET_ALL_DOGS, GET_BY_ID, GET_BY_NAME, POST_DOG, GET_TEMPERAMENT} from './action-types';
+import {GET_ALL_DOGS, DOG_DETAIL, GET_BY_NAME, POST_DOG, GET_TEMPERAMENT, CLEAN_DETAIL, ORDER_BY_NAME, ORDER_BY_WEIGHT, TEMPERAMENT_FILTER} from './action-types';
 
 const getDogs = () => {
     return async function (dispatch) {
         const apiData = await axios.get(
             'http://localhost:3001/dogs'
         )
-        const dogs = apiData.data;
-        dispatch({type: GET_ALL_DOGS, payload: dogs.data})
+        dispatch({type: GET_ALL_DOGS, payload: apiData.data})
     }
 }
 
 const getById = (id) => async (dispatch) => {
     try {
-        return async function () {
-            const byId = await axios.get(`http://localhost:3001/dogs/${id}`);
-            const dogs = byId.data;
-            dispatch({type: GET_BY_ID, payload: dogs.data})
-        }
-    } catch (error) {
+        const byId = await axios.get(`http://localhost:3001/dogs/${id}`);
+        return dispatch({type: DOG_DETAIL, payload: byId.data})
         
+    } catch (error) {
+        const noDetail = [];
+        return dispatch({type: DOG_DETAIL, payload: noDetail})
     }
 }
 
 
-const getByName = (name) => {
+const getByName = (name) => async (dispatch) => {
     try {
-        return async function (dispatch) {
-            const byName = await axios.get(`http://localhost:3001/dogs/${name}`);
-            const dog = byName.data;
-            dispatch({type: GET_BY_NAME, payload: dog.data})
-        }
-    } catch (error) {
+        const byName = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+        return dispatch({type: GET_BY_NAME, payload: byName.data})
         
+    } catch (error) {
+        const noName = [];
+        return dispatch({type: GET_BY_NAME, payload: noName})
     }
 }
 
 
-const postDog = () => {
-
+const postDog = (newDog) => {
+    return async function (dispatch) {
+        const createDog = await axios.post("http://localhost:3001/dogs/", newDog);
+        return dispatch({type: POST_DOG, payload: createDog.data,
+        });
+      };
 }
 
 
-const getTemperament = () => {
-
+const getTemperament = () => async (dispatch) => {
+    try {
+        const allTemperaments = await axios.get('http://localhost:3001/temperaments');
+        const temperamentsSorted = allTemperaments.data.sort((a, b) => a.name.localeCompare(b.name));
+        return dispatch({ type: GET_TEMPERAMENT, payload: temperamentsSorted });
+    } catch (error) {
+        throw new Error(error);
+    }
 }
 
+
+const cleanDetail = () => {
+    return {type: CLEAN_DETAIL}
+}
+
+
+const orderByName = (dogs, value) => {
+    try {
+        let dogsSorted = []
+        if (value === "Ascendent") {
+            dogsSorted = dogs.sort((a, b) => a.name.localeCompare(b.name))
+        }
+        if (value === "Descendent") {
+            dogsSorted = dogs.sort((a, b) => b.name.localeCompare(a.name))
+        }
+        return function (dispatch) {
+            dispatch({ type: ORDER_BY_NAME, payload: dogsSorted })
+        }
+
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+const orderByWeight = (dogs, value) => {
+    try {
+        let dogsSorted = []
+        if (value === "High-Low") {
+            dogsSorted = dogs.sort(
+                (a, b) =>
+                    (a.minWeight < b.minWeight) ? 1 : (a.minWeight > b.minWeight) ? -1 : 0);
+        }
+        if (value === "Low-High") {
+            dogsSorted = dogs.sort(
+                (a, b) =>
+                    (a.minWeight > b.minWeight) ? 1 : (a.minWeight < b.minWeight) ? -1 : 0);
+        }
+        return function (dispatch) {
+            dispatch({ type: ORDER_BY_WEIGHT, payload: dogsSorted })
+        }
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+
+const temperamentFilter = (dogs, value) => {
+    try {
+        const filtered = [];
+        dogs.forEach(dog => {
+            const dogTemperament = [];
+            dog.temperament ? dogTemperament.push(...dog.temperament.split(', ')) : [];
+            dogTemperament.includes(value) ? filtered.push(dog) : []
+        });
+        return function (dispatch) {
+            dispatch({ type: TEMPERAMENT_FILTER, payload: filtered })
+        }
+    } catch (error) {
+        throw new Error(error)
+    }
+}
 
 
 export {
@@ -53,5 +121,9 @@ export {
     getById,
     getByName,
     postDog,
-    getTemperament
+    getTemperament,
+    cleanDetail,
+    orderByName,
+    orderByWeight,
+    temperamentFilter
 }
