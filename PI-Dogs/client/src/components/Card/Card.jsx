@@ -1,12 +1,16 @@
 import style from './Card.module.css';
+import { Link } from 'react-router-dom';
 
-const Card = (props) => {
+const Card = ({ id, image, name, temperament }) => {
+
     return (
-        <div className={style.card}>
-            <img />
-            <h3>Name: {props.name}</h3>
-            <h6>Temperament: {props.temperament}</h6>
-        </div>
+        <Link to={`/home/${id}`}>
+            <div className={style.card}>
+                <img className={style.img} src={image} alt={name} />
+                <h3 className={style.name}>Name: {name}</h3>
+                <p className={style.temperament}>Temperament: {temperament}</p>
+            </div>
+        </Link>
     )
 }
 

@@ -31,17 +31,17 @@ const CardsContainer = ({dogs}) => {
                         />
                     </>)}
             </>) : (<>
-                    <div className="loader">
-                    <div className="dog">
-                        <div className="dog-body">
-                        <div className="dog-tail">
-                            <div className="dog-tail">
-                                <div className="dog-tail">
-                                    <div className="dog-tail">
-                                    <div className="dog-tail">
-                                        <div className="dog-tail">
-                                            <div className="dog-tail">
-                                                <div className="dog-tail"></div>
+                    <div className={style.loader}>
+                    <div className={style.dog}>
+                        <div className={style.dog-body}>
+                        <div className={style.dog-tail}>
+                            <div className={style.dog-tail}>
+                                <div className={style.dog-tail}>
+                                    <div className={style.dog-tail}>
+                                    <div className={style.dog-tail}>
+                                        <div className={style.dog-tail}>
+                                            <div className={style.dog-tail}>
+                                                <div className={style.dog-tail}></div>
                                             </div>
                                         </div>
                                     </div>
