@@ -104,8 +104,8 @@ const temperamentFilter = (dogs, value) => {
         const filtered = [];
         dogs.forEach(dog => {
             const dogTemperament = [];
-            dog.temperament ? dogTemperament.push(...dog.temperament.split(', ')) : [];
-            dogTemperament.includes(value) ? filtered.push(dog) : []
+            if (dog.temperament) dogTemperament.push(...dog.temperament.split(', '));
+            if (dogTemperament.includes(value)) filtered.push(dog);
         });
         return function (dispatch) {
             dispatch({ type: TEMPERAMENT_FILTER, payload: filtered })
