@@ -22,11 +22,9 @@ const Home = () => {
         <div>
             <div className={style.nav}>
                 <h1>Dog Breeds</h1>
-                {/* <NavBar /> */}
+                <NavBar />
             </div>
             <div className='mainContainer'>
-                {/* <Pagination firstHandler={firstHandler} prevHandler={prevHandler} nextHandler={nextHandler} lastHandler={lastHandler} pagination={pagination} totalDogs={dogs.length} dogsPerPage={dogsPerPage} currentPage={currentPage} pageNumberLimit={pageNumberLimit} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} />
-                <br /> */}
 
                 <CardsContainer />
 

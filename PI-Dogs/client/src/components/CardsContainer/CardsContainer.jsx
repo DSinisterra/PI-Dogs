@@ -31,41 +31,41 @@ const CardsContainer = ({dogs}) => {
                         />
                     </>)}
             </>) : (<>
-                    <div className={style.loader}>
-                    <div className={style.dog}>
-                        <div className={style.dog-body}>
-                        <div className={style.dog-tail}>
-                            <div className={style.dog-tail}>
-                                <div className={style.dog-tail}>
-                                    <div className={style.dog-tail}>
-                                    <div className={style.dog-tail}>
-                                        <div className={style.dog-tail}>
-                                            <div className={style.dog-tail}>
-                                                <div className={style.dog-tail}></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div className="loader" style={style}>
+         <div className="dog" style={style}>
+            <div className="dog-body" style={style}>
+               <div className="dog-tail" style={style}>
+                  <div className="dog-tail" style={style}>
+                     <div className="dog-tail" style={style}>
+                        <div className="dog-tail" style={style}>
+                           <div className="dog-tail" style={style}>
+                              <div className="dog-tail" style={style}>
+                                 <div className="dog-tail" style={style}>
+                                    <div className="dog-tail" style={style}></div>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                        </div>
-                        <div class="dog-torso"></div>
-                        <div class="dog-head">
-                        <div class="dog-ears">
-                            <div class="dog-ear"></div>
-                            <div class="dog-ear"></div>
-                        </div>
-                        <div class="dog-eyes">
-                            <div class="dog-eye"></div>
-                            <div class="dog-eye"></div>
-                        </div>
-                        <div class="dog-muzzle">
-                            <div class="dog-tongue"></div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div className="dog-torso" style={style}></div>
+            <div className="dog-head" style={style}>
+               <div className="dog-ears" style={style}>
+                  <div className="dog-ear" style={style}></div>
+                  <div className="dog-ear" style={style}></div>
+               </div>
+               <div className="dog-eyes" style={style}>
+                  <div className="dog-eye" style={style}></div>
+                  <div className="dog-eye" style={style}></div>
+               </div>
+               <div className="dog-muzzle" style={style}>
+                  <div className="dog-tongue" style={style}></div>
+               </div>
+            </div>
+         </div>
+      </div>
             </>)}
         </div>
     )

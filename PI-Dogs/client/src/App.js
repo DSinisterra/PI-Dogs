@@ -10,8 +10,6 @@ function App() {
   return (
     <div className="App">
 
-      {location.pathname !== "/" && <NavBar />}
-
       <Route exact path="/">
         <Landing />
       </Route>
