@@ -4,7 +4,7 @@ import {GET_ALL_DOGS, DOG_DETAIL, GET_BY_NAME, POST_DOG, GET_TEMPERAMENT, CLEAN_
 const getDogs = () => {
     return async function (dispatch) {
         const apiData = await axios.get(
-            'http://localhost:3001/dogs'
+            '/dogs'
         )
         dispatch({type: GET_ALL_DOGS, payload: apiData.data})
     }
@@ -12,7 +12,7 @@ const getDogs = () => {
 
 const getById = (id) => async (dispatch) => {
     try {
-        const byId = await axios.get(`http://localhost:3001/dogs/${id}`);
+        const byId = await axios.get(`/dogs/${id}`);
         return dispatch({type: DOG_DETAIL, payload: byId.data})
         
     } catch (error) {
@@ -24,7 +24,7 @@ const getById = (id) => async (dispatch) => {
 
 const getByName = (name) => async (dispatch) => {
     try {
-        const byName = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+        const byName = await axios.get(`/dogs?name=${name}`);
         return dispatch({type: GET_BY_NAME, payload: byName.data})
         
     } catch (error) {
@@ -36,7 +36,7 @@ const getByName = (name) => async (dispatch) => {
 
 const postDog = (newDog) => {
     return async function (dispatch) {
-        const createDog = await axios.post("http://localhost:3001/dogs/", newDog);
+        const createDog = await axios.post("/dogs/", newDog);
         return dispatch({type: POST_DOG, payload: createDog.data,
         });
       };
@@ -45,7 +45,7 @@ const postDog = (newDog) => {
 
 const getTemperament = () => async (dispatch) => {
     try {
-        const allTemperaments = await axios.get('http://localhost:3001/temperaments');
+        const allTemperaments = await axios.get('/temperaments');
         const temperamentsSorted = allTemperaments.data.sort((a, b) => a.name.localeCompare(b.name));
         return dispatch({ type: GET_TEMPERAMENT, payload: temperamentsSorted });
     } catch (error) {

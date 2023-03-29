@@ -1,12 +1,13 @@
 import React from 'react';
-import style from 'Pagination.module.css';
+import style from './Pagination.module.css';
 
 const Pagination = ({firstHandler, prevHandler, nextHandler, lastHandler, pagination, totalDogs, dogsPerPage, currentPage, pageNumberLimit, maxPageNumberLimit, minPageNumberLimit}) => {
     let pages = [];
     let firstPage = 1;
     let lastPage = 1;
+    const amountOfPages = Math.ceil(totalDogs / dogsPerPage);
 
-    for (let i = 1; i <= Math.ceil(totalDogs / dogsPerPage); i++) {
+    for (let i = 1; i <= amountOfPages; i++) {
         lastPage = i;
         pages.push(i);
     }
