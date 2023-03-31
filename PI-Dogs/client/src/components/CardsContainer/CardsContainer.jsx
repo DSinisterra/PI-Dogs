@@ -1,74 +1,58 @@
-import Card from '../Card/Card';
-import style from './CardsContainer.module.css';
-import {useSelector} from 'react-redux';
+import React, {useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDogs } from "../../redux/actions";
+import Card from "../Card/Card";
+import style from "./CardsContainer.module.css";
+import Loader from "../Loader/Loader";
+import Pagination from '../../components/Pagination/Pagination';
+import Filters from "../TemperamentFilter/TemperamentFilter";
 
+const CardsContainer = () => {
+   const dispatch = useDispatch();
+   const allDogs = useSelector((state) => state.dogs);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [dogsPerPage, setDogsPerPage] = useState(9);
+   const indexOfLastDog = currentPage * dogsPerPage;
+   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
+   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog);
 
-const CardsContainer = ({dogs}) => {
-    const loading = useSelector(state => state.loading);
-    
-    return (
-        <div className={style.container}>
-            {loading ? (<>
-                {dogs.length > 0 ? (
-                    <>
-                        {dogs.map((dog) => {
-                            return <Card 
-                                key = {dog.id}
-                                id = {dog.id}
-                                name = {dog.name}
-                                image = {dog.image}
-                                temperament = {dog.temperament}
-                            />
-                        })}
-                    </>
-                ) : (<>
-                        <Card
-                            key = "no-info"
-                            id = "no-info"
-                            name = "Breed not found"
-                           image = "https://st.depositphotos.com/10614052/56431/i/600/depositphotos_564315362-stock-photo-cute-french-bulldog-and-question.jpg"
-                           temperament = "There is no information"
-                        />
-                    </>)}
-            </>) : (<>
-                <div className="loader" style={style}>
-         <div className="dog" style={style}>
-            <div className="dog-body" style={style}>
-               <div className="dog-tail" style={style}>
-                  <div className="dog-tail" style={style}>
-                     <div className="dog-tail" style={style}>
-                        <div className="dog-tail" style={style}>
-                           <div className="dog-tail" style={style}>
-                              <div className="dog-tail" style={style}>
-                                 <div className="dog-tail" style={style}>
-                                    <div className="dog-tail" style={style}></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div className="dog-torso" style={style}></div>
-            <div className="dog-head" style={style}>
-               <div className="dog-ears" style={style}>
-                  <div className="dog-ear" style={style}></div>
-                  <div className="dog-ear" style={style}></div>
-               </div>
-               <div className="dog-eyes" style={style}>
-                  <div className="dog-eye" style={style}></div>
-                  <div className="dog-eye" style={style}></div>
-               </div>
-               <div className="dog-muzzle" style={style}>
-                  <div className="dog-tongue" style={style}></div>
-               </div>
-            </div>
-         </div>
-      </div>
-            </>)}
-        </div>
-    )
+   useEffect(() => {
+      dispatch(getDogs());
+   }, []);
+
+   const pagination = (pageNumber) => {
+      setCurrentPage(pageNumber);
+  }
+
+   return (
+      <>
+         <ul className={style.container}>
+            {currentDogs.length 
+            ? (currentDogs.map((dog) => {
+               return (
+                  <li key={dog.id}>
+                     <Card 
+                        key={dog.id} 
+                        id={dog.id} 
+                        name={dog.name}
+                        image={dog.image}
+                        temperament={dog.temperament}
+                     />
+                  </li>)
+            }))
+            : null
+            }
+         </ul>
+
+         <Pagination
+            allDogs={allDogs.length}
+            dogsPerPage={dogsPerPage}
+            pagination={pagination} 
+        />
+
+      </>
+   )
+
 }
 
 

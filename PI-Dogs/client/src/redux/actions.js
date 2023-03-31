@@ -3,10 +3,8 @@ import {GET_ALL_DOGS, DOG_DETAIL, GET_BY_NAME, POST_DOG, GET_TEMPERAMENT, CLEAN_
 
 const getDogs = () => {
     return async function (dispatch) {
-        const apiData = await axios.get(
-            '/dogs'
-        )
-        dispatch({type: GET_ALL_DOGS, payload: apiData.data})
+        const apiData = await axios.get('/dogs')
+        return dispatch({type: GET_ALL_DOGS, payload: apiData.data})
     }
 }
 
@@ -43,7 +41,7 @@ const postDog = (newDog) => {
 }
 
 
-const getTemperament = () => async (dispatch) => {
+const getTemperament = async (dispatch) => {
     try {
         const allTemperaments = await axios.get('/temperaments');
         const temperamentsSorted = allTemperaments.data.sort((a, b) => a.name.localeCompare(b.name));
@@ -71,7 +69,6 @@ const orderByName = (dogs, value) => {
         return function (dispatch) {
             dispatch({ type: ORDER_BY_NAME, payload: dogsSorted })
         }
-
     } catch (error) {
         throw new Error(error);
     }
