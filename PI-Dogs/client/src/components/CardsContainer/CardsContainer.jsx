@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDogs } from "../../redux/actions";
 import Card from "../Card/Card";
 import style from "./CardsContainer.module.css";
-import Loader from "../Loader/Loader";
 import Pagination from '../../components/Pagination/Pagination';
 import Filters from "../TemperamentFilter/TemperamentFilter";
 

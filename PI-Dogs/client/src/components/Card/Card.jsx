@@ -7,7 +7,7 @@ const Card = ({ id, image, name, temperament }) => {
         <Link to={`/home/${id}`}>
             <div className={style.card}>
                 <img className={style.img} src={image} alt={name} />
-                <h3 className={style.name}>Name: {name}</h3>
+                <h3 className={style.name}>{name}</h3>
                 <p className={style.temperament}>Temperament: {temperament}</p>
             </div>
         </Link>
