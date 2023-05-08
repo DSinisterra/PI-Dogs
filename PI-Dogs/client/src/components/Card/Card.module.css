@@ -1,22 +1,28 @@
 .card {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 5px 3px 2px rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1);
     margin: 1.5rem 1rem;
     max-width: 20rem;
     min-height: 27rem;
+    text-decoration: none;
 }
 
 .card:hover {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 6px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 7px 5px 4px rgba(0, 0, 0, 0.1), 0 1px 6px 1px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover > img {
     transform: scale(1.05);
 }
 
+.card:visited {
+    color: rgba(58, 90, 64);
+    text-decoration: none;
+}
+
 .img {
     transition: transform 0.2s ease-out;
-    display: block; /* Esto elimina el espacio en blanco que a veces aparece debajo de la imagen */
-    width: 80%; /* Esto asegura que la imagen tenga el ancho completo del contenedor */
+    display: block; 
+    width: 80%; 
     max-height: 50%;
 }
 
@@ -26,6 +32,7 @@
     color: #4b5563;
     padding: 0rem 1.25rem 0.375rem 0.625rem;
     margin-top: 0rem;
+    text-decoration: none;
 }
 
 .temperament {
@@ -33,6 +40,7 @@
     line-height: 1.5;
     color: #4b5563;
     padding: 0 1.25rem 1rem;
+    text-decoration: none;
 }
 
 
