@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-
+import style from './Create.module.css';
+import NavBar from '../../components/NavBar/NavBar';
 
 const Create = () => {
     const [form, setForm] = useState({
@@ -48,53 +49,39 @@ const Create = () => {
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <div>
-                <label htmlFor="name">Name: </label>
-                <input type="text" name="name" value={form.name} onChange={onChange} />
-            </div>
+        <>
+            <NavBar />
+            <form onSubmit={onSubmit} className={style.form}>
 
-            <div>
-                <label htmlFor="image">Image: </label>
-                <input type="text" name="image" value={form.image} onChange={onChange} />
-            </div>
+                    <label htmlFor="name" className={style.label}>Name </label>
+                    <input type="text" name="name" value={form.name} onChange={onChange} className={style.input} />
 
-            <div>
-                <label htmlFor="minWeight">Minimum Weight: </label>
-                <input type="number" name="minWeight" value={form.minWeight} onChange={onChange} />
-            </div>
+                    <label htmlFor="image" className={style.label}>Image </label>
+                    <input type="text" name="image" value={form.image} onChange={onChange} className={style.input} />
 
-            <div>
-                <label htmlFor="maxWeight">Maximum Weight: </label>
-                <input type="number" name="maxWeight" value={form.maxWeight} onChange={onChange} />
-            </div>
+                    <label htmlFor="minWeight" className={style.label}>Minimum Weight </label>
+                    <input type="number" name="minWeight" value={form.minWeight} onChange={onChange} className={style.input} />
 
-            <div>
-                <label htmlFor="minHeight">Minimum Height: </label>
-                <input type="number" name="minHeight" value={form.minHeight} onChange={onChange} />
-            </div>
+                    <label htmlFor="maxWeight" className={style.label}>Maximum Weight </label>
+                    <input type="number" name="maxWeight" value={form.maxWeight} onChange={onChange} className={style.input} />
 
-            <div>
-                <label htmlFor="maxHeight">Maximum Height: </label>
-                <input type="number" name="maxHeight" value={form.maxHeight} onChange={onChange} />
-            </div>
+                    <label htmlFor="minHeight" className={style.label}>Minimum Height </label>
+                    <input type="number" name="minHeight" value={form.minHeight} onChange={onChange} className={style.input} />
 
-            <div>
-                <label htmlFor="minLifeSpan">Minimum Life Span: </label>
-                <input type="number" name="minLifeSpan" value={form.minLifeSpan} onChange={onChange} />
-            </div>
+                    <label htmlFor="maxHeight" className={style.label}>Maximum Height </label>
+                    <input type="number" name="maxHeight" value={form.maxHeight} onChange={onChange} className={style.input} />
 
-            <div>
-                <label htmlFor="maxLifeSpan">Maximum Life Span: </label>
-                <input type="number" name="maxLifeSpan" value={form.maxLifeSpan} onChange={onChange} />
-            </div>
+                    <label htmlFor="minLifeSpan" className={style.label}>Minimum Life Span </label>
+                    <input type="number" name="minLifeSpan" value={form.minLifeSpan} onChange={onChange} className={style.input} />
 
-            <div>
-                <label htmlFor="temperament">Temperament: </label>
-                <input type="text" name="temperament" value={form.temperament} onChange={onChange} />
-            </div>
+                    <label htmlFor="maxLifeSpan" className={style.label}>Maximum Life Span: </label>
+                    <input type="number" name="maxLifeSpan" value={form.maxLifeSpan} onChange={onChange} className={style.input} />
 
-        </form>
+                    <label htmlFor="temperament" className={style.label}>Temperament </label>
+                    <input type="text" name="temperament" value={form.temperament} onChange={onChange} className={style.input} />
+
+            </form>
+        </>
     )
 }
 
