@@ -1,0 +1,15 @@
+
+.pages{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pages:hover {
+    background-color: #588157;
+}
+
+.active {
+    background-color: #588157;
+}

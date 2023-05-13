@@ -1,6 +1,66 @@
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
 
+.box {
+    width: 15rem;
+    height: 17rem;
+    z-index: 1;
+    color: antiquewhite;
+    backdrop-filter: blur(20px);
+    background-color: rgba(58, 90, 64, 0.5);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    position: absolute;
+    top: 10rem;
+    left: 4rem;
+}
+
+.button {
+    background-color: antiquewhite;
+    color: rgb(58, 90, 64);
+    font-weight: bold;
+    font-size: medium;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: scale(1.1);
+    transition-duration: 0.4s;
+}
+
+.button:active {
+    transform: scale(0.9);
+    transition-duration: 0.5s;
+  }
 
 .icons {
-    display: block;
+    display: flex;
     padding: 1rem;
+    font-size: 2rem;
+    justify-content: center;
+    gap: 1rem;
+    color: antiquewhite;
+}
+
+a:hover {
+    transform: scale(1.1);
+    transition-duration: 0.4s;
+    color: antiquewhite;
+}
+
+a:active {
+    color: antiquewhite;
+}
+
+a:visited {
+    color: antiquewhite;
 }

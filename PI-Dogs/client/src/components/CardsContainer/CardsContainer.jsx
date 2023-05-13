@@ -3,31 +3,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDogs } from "../../redux/actions";
 import Card from "../Card/Card";
 import style from "./CardsContainer.module.css";
-import Pagination from '../../components/Pagination/Pagination';
+import usePagination from "../Pagination/Pagination";
 import Filters from "../TemperamentFilter/TemperamentFilter";
 
 const CardsContainer = () => {
    const dispatch = useDispatch();
    const allDogs = useSelector((state) => state.dogs);
-   const [currentPage, setCurrentPage] = useState(1);
-   const [dogsPerPage, setDogsPerPage] = useState(9);
-   const indexOfLastDog = currentPage * dogsPerPage;
-   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
-   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog);
+   const { currentItems, pages, currentPage, setCurrentPage } = usePagination(
+      allDogs,
+      9
+    );
+   
 
    useEffect(() => {
       dispatch(getDogs());
    }, []);
 
-   const pagination = (pageNumber) => {
-      setCurrentPage(pageNumber);
-  }
 
    return (
       <>
          <ul className={style.container}>
-            {currentDogs.length 
-            ? (currentDogs.map((dog) => {
+            {currentItems.length 
+            ? (currentItems.map((dog) => {
                return (
                   <li key={dog.id}>
                      <Card 
@@ -42,13 +39,10 @@ const CardsContainer = () => {
             : null
             }
          </ul>
+         
+         <div className={style.pages}>
 
-         <Pagination
-            allDogs={allDogs.length}
-            dogsPerPage={dogsPerPage}
-            pagination={pagination} 
-        />
-
+         </div>
       </>
    )
 

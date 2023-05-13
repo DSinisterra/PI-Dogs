@@ -6,7 +6,6 @@
     left: 0;
     z-index: 50;
     backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
     background-color: rgba(58, 90, 64, 0.7);
     transition-duration: 0.5s;
     display: flex;
@@ -26,5 +25,5 @@
 
 .link:hover {
     cursor: pointer;
-    color: #588157;
+    color: #8fc78e;
 }

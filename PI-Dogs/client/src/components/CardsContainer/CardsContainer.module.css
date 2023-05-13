@@ -4,5 +4,12 @@
   margin-top: 8rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
+}
+
+.pages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }

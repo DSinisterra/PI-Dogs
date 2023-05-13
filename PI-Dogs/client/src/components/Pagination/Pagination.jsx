@@ -1,30 +1,23 @@
-import React from 'react';
-import style from './Pagination.module.css';
+import { useState } from 'react';
 
-const Pagination = ({allDogs, dogsPerPage, pagination}) => {
-    let pages = [];
-    let firstPage = 1;
-    let lastPage = 1;
+function usePagination(items, itemsPerPage) {
+  const [currentPage, setCurrentPage] = useState(1);
 
-    for (let i = 1; i <= Math.ceil(allDogs / dogsPerPage); i++) {
-        lastPage = i;
-        pages.push(i);
-    }
+  const pagesCount = Math.ceil(items.length / itemsPerPage);
+  const pages = Array.from(Array(pagesCount).keys());
 
-    return (
-        <>
-            <nav>
-                <ul className='pages'>
-                    {pages?.map(page => (
-                        <li key={page} className={page === pagination.page? style.active : ''}>
-                            <button onClick={() => pagination(page)} > {page} </button>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-        </>
-    )
+  const handleClick = (page) => setCurrentPage(page);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = items.slice(startIndex, endIndex);
+
+  return {
+    currentPage,
+    setCurrentPage: handleClick,
+    pages,
+    currentItems,
+  };
 }
 
-
-export default Pagination;
+export default usePagination;
