@@ -41,11 +41,15 @@ const postDog = (newDog) => {
 }
 
 
-const getTemperament = async (dispatch) => {
+const getTemperament = () => async (dispatch) => {
     try {
-        const allTemperaments = await axios.get('/temperaments');
+        const allTemperaments = await axios.get('/temperament');
         const temperamentsSorted = allTemperaments.data.sort((a, b) => a.name.localeCompare(b.name));
-        return dispatch({ type: GET_TEMPERAMENT, payload: temperamentsSorted });
+        if (typeof dispatch === 'function') {
+            dispatch({ type: GET_TEMPERAMENT, payload: temperamentsSorted });
+        } else {
+            console.error("Dispatch is not a function");
+        }
     } catch (error) {
         throw new Error(error);
     }
