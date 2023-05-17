@@ -34,7 +34,7 @@ const rootReducer = (state = initialState, action) => {
         
         case TEMPERAMENT_FILTER:
             return { ...state, dogs: action.payload, filter: true, loading: true };
-
+            
         default:
             return {...state};
     }

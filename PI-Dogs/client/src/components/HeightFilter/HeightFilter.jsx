@@ -1,21 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {temperamentFilter, getTemperament } from '../../redux/actions';
 import {useEffect} from 'react';
-import style from './TemperamentFilter.module.css';
+import style from './HeightFilter.module.css';
 
 
-const TemperamentFilter = () => {
+const HeightFilter = () => {
     const dispatch = useDispatch();
-    const dogs = useSelector(state => state.dogs)
     const temperament = useSelector(state => state.temperament);
 
     const handleTemperament = (event) => {
-        dispatch(temperamentFilter(dogs, event.target.value))
+        dispatch(temperamentFilter(event.target.value))
     }
 
     useEffect(() => {
-        dispatch(getTemperament());
-        dispatch(temperamentFilter(dogs, ""));
+        dispatch(getTemperament())
     }, [])
 
     return (
@@ -29,4 +27,4 @@ const TemperamentFilter = () => {
 }
 
 
-export default TemperamentFilter;
+export default HeightFilter;

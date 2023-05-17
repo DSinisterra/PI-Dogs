@@ -72,6 +72,10 @@ const Create = () => {
         setForm({...form, temperament: [...form.temperament, event.target.value]})
     }
 
+    const deleteSelected = (el) => {
+        setForm({...form, temperament: [form.temperament.filter((temp) => temp !== el)]})
+    }
+      
     const onSubmit = (event) => {
         event.preventDefault();
         axios.post("")
@@ -115,7 +119,16 @@ const Create = () => {
                             </option>)
                         )}
                     </select>
-
+                    <div>
+                        {form.temperament.map((temp) => (
+                            <div key={temp}>
+                                <span>
+                                    {temp}
+                                </span>
+                                <button onClick={deleteSelected}>X</button>
+                            </div>
+                        ) )}
+                    </div>
             </form>
         </>
     )

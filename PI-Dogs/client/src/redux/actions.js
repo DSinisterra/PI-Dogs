@@ -102,11 +102,15 @@ const orderByWeight = (dogs, value) => {
 
 const temperamentFilter = (dogs, value) => {
     try {
-        const filtered = [];
+        let filtered = [];
         dogs.forEach(dog => {
             const dogTemperament = [];
-            if (dog.temperament) dogTemperament.push(...dog.temperament.split(', '));
-            if (dogTemperament.includes(value)) filtered.push(dog);
+            if (dog.temperament) {
+                dogTemperament.push(...dog.temperament.split(', '))
+            };
+            if (dogTemperament.includes(value)) {
+                filtered.push(dog)
+            };
         });
         return function (dispatch) {
             dispatch({ type: TEMPERAMENT_FILTER, payload: filtered })
