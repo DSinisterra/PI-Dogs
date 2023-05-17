@@ -4,7 +4,6 @@ import { getDogs } from "../../redux/actions";
 import Card from "../Card/Card";
 import style from "./CardsContainer.module.css";
 import usePagination from "../Pagination/Pagination";
-import Filters from "../TemperamentFilter/TemperamentFilter";
 
 const CardsContainer = () => {
    const dispatch = useDispatch();
@@ -13,6 +12,16 @@ const CardsContainer = () => {
       allDogs,
       9
     );
+
+   let pagesToShow = [];
+   
+   if (currentPage <= 3) {
+      pagesToShow = [1, 2, 3, 4, 5]
+   } else {
+      for (let page = currentPage - 2; page <= currentPage + 2 ; page++) {
+         pagesToShow.push(page);
+      }
+   }
    
 
    useEffect(() => {
@@ -41,7 +50,24 @@ const CardsContainer = () => {
          </ul>
          
          <div className={style.pages}>
+            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+               ◄
+            </button>
+            {pagesToShow.map((page) => {
+               return (
+                  <button
+                     key={page}
+                     onClick={() => setCurrentPage(page)}
+                     className={page === currentPage ? style.active : ""}
+                  >
+                     {page}
+                  </button>
+               );
+            })}
 
+            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === pages}>
+               ►
+            </button>
          </div>
       </>
    )
