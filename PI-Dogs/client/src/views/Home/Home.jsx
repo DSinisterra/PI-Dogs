@@ -1,7 +1,8 @@
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
-import HeightFilter from '../../components/HeightFilter/HeightFilter';
 import NavBar from '../../components/NavBar/NavBar';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import SortAZ from '../../components/SortAZ/SortAZ';
+import SortWeight from '../../components/SortWeight/SortWeight';
 import TemperamentFilter from '../../components/TemperamentFilter/TemperamentFilter';
 import style from './Home.module.css';
 
@@ -14,7 +15,8 @@ const Home = () => {
         <div className={style.filters}>
             <SearchBar />
             <TemperamentFilter />
-            <HeightFilter />
+            <SortAZ />
+            <SortWeight />
         </div>
         <CardsContainer />
     </>
