@@ -14,15 +14,32 @@ const CardsContainer = () => {
     );
 
    let pagesToShow = [];
-   
-   if (currentPage <= 3) {
-      pagesToShow = [1, 2, 3, 4, 5]
-   } else {
-      for (let page = currentPage - 2; page <= currentPage + 2 ; page++) {
+
+   if (pages.length <= 5) {
+      for (let page = 1; page <= pages.length; page++) {
          pagesToShow.push(page);
       }
+   } else {
+      if (currentPage <= 3) {
+         pagesToShow = [1, 2, 3, 4, 5]
+      } else if (currentPage >= pages.length - 2) {      
+         pagesToShow = [
+            pages.length - 4,
+            pages.length - 3,
+            pages.length - 2,
+            pages.length - 1,
+            pages.length
+         ];
+      } else {
+         pagesToShow = [
+            currentPage - 2,
+            currentPage - 1,
+            currentPage,
+            currentPage + 1,
+            currentPage + 2,
+         ]
+      }
    }
-   
 
    useEffect(() => {
       dispatch(getDogs());
@@ -50,7 +67,7 @@ const CardsContainer = () => {
          </ul>
          
          <div className={style.pages}>
-            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+            <button onClick={currentPage - 1 ? () => setCurrentPage(currentPage - 1) : ''} disabled={currentPage === 1}>
                ◄
             </button>
             {pagesToShow.map((page) => {
@@ -65,7 +82,7 @@ const CardsContainer = () => {
                );
             })}
 
-            <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === pages}>
+            <button onClick={pages.includes(currentPage) ? () => setCurrentPage(currentPage + 1) : ''} disabled={currentPage === pages}>
                ►
             </button>
          </div>
