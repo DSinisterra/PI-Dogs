@@ -1,0 +1,38 @@
+
+.image {
+    width: 50rem;
+    box-shadow: 3px 7px 5px 4px rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+}
+
+.textContainer {
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 50rem;
+   margin: 0 auto;
+}
+
+.item {
+    grid-column: span 1;
+}
+
+.temperament {
+    grid-column: span 3;
+}
+
+h3 {
+    color: #4b5563;
+    font-size: 2rem;
+    margin: 5rem 1rem 1rem;
+}
+
+h5 {
+    color: #4b5563;
+    font-size: 1.5rem;
+}
+
+p {
+    color: #4b5563;
+    font-size: 1.25rem;
+}
+

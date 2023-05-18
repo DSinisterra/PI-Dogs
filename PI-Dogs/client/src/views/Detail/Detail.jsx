@@ -19,13 +19,36 @@ const Detail = () => {
     return (
         <>
             <NavBar />
+            <h3>{name}</h3>
             <img src={image} alt={name} className={style.image} />
             <div className={style.textContainer}>
-                <h3>{name}</h3>
-                <h5>Weight: </h5> <p>{minWeight} - {maxWeight} kg</p>
-                <h5>Height: </h5> <p>{minHeight} - {maxHeight} cm</p>
-                <h5>Life Span: </h5> <p>{minLifeSpan} - {maxLifeSpan} </p>
-                <h5>Temperament: </h5> <p>{temperament ? temperament : "there is no information"}</p>
+                <div className={style.item}>
+                    <h5>Weight</h5> 
+                    <hr />
+                    <p>
+                        {minWeight} - {maxWeight} kg
+                    </p>
+                </div>
+
+                <div className={style.item}>
+                    <h5>Height</h5> 
+                    <hr />
+                    <p>
+                        {minHeight} - {maxHeight} cm
+                    </p>
+                </div>
+
+                <div className={style.item}>
+                    <h5>Life Span</h5> 
+                    <hr />
+                    <p>
+                        {minLifeSpan} - {maxLifeSpan} 
+                    </p>
+                </div>
+                <h5 className={style.temperament}>Temperament</h5>
+                <p className={style.temperament}>
+                    {temperament ? temperament : "there is no information"}
+                </p>
             </div>
         </>
     )
