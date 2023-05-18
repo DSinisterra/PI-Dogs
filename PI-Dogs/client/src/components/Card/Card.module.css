@@ -21,8 +21,10 @@
 .img {
     transition: transform 0.2s ease-out;
     display: block; 
-    width: 80%; 
+    width: 90%; 
     max-height: 50%;
+    margin: 1rem auto;
+    padding-top: 1rem;
 }
 
 .name {
@@ -38,18 +40,4 @@
     line-height: 1.5;
     color: #4b5563;
     padding: 0 1.25rem 1rem;
-}
-
-
-@media (min-width: 640px) {
-    .card {
-      transform: translateY(-48%);
-      z-index: 10;
-    }
-}
-
-@media (min-width: 640px) {
-    .img {
-      padding: 2rem;
-    }
 }

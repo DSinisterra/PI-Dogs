@@ -117,9 +117,9 @@ const Create = () => {
                             </option>)
                         )}
                     </select>
-                    <div>
+                    <div className={style.temperamentList}>
                         {form.temperament.map((temp) => (
-                            <div key={temp}>
+                            <div key={temp} className={style.temperamentItem}>
                                 <span>
                                     {temp}
                                 </span>
@@ -127,6 +127,8 @@ const Create = () => {
                             </div>
                         ) )}
                     </div>
+                    <br />
+                    <button type="submit" className={style.submitButton}>Submit</button>
             </form>
         </>
     )
