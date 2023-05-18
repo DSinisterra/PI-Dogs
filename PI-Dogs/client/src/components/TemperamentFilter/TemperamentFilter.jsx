@@ -16,7 +16,7 @@ const TemperamentFilter = () => {
     useEffect(() => {
         dispatch(getTemperament());
         dispatch(temperamentFilter(dogs, ""));
-    }, [])
+    }, [dispatch])
 
     return (
         <>

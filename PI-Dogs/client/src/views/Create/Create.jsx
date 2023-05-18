@@ -11,7 +11,7 @@ const Create = () => {
     
     useEffect(() => {
         dispatch(getTemperament())
-    }, [])
+    }, [dispatch])
 
     const [form, setForm] = useState({
         name: "",
@@ -24,8 +24,6 @@ const Create = () => {
         maxLifeSpan: 0,
         temperament: []
     })
-    
-    const [error, setError] = useState({})
 
     const handleChange = (event) => {
         const {name, value} = event.target;

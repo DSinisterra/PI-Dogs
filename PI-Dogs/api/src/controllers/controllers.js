@@ -17,7 +17,7 @@ const getDogsFromApi = async () => {
                 minHeight: parseInt(dog.height.metric.split("-")[0]),
                 maxHeight: parseInt(dog.height.metric.split("-")[1]),
                 minLifeSpan: parseInt(dog.life_span.split("-")[0]),
-                maxLifeSpan: dog.life_span.split("-")[1],
+                maxLifeSpan: dog.life_span.includes('-') ? dog.life_span.split("-")[1] : 'years',
                 image: dog.image.url,
                 temperament: dog.temperament
             }

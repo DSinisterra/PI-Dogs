@@ -20,11 +20,11 @@ const Landing = () => {
                 </Link>
 
                 <div className={style.icons}>
-                    <a href='https://www.linkedin.com/in/denis-sinisterra-9bb49b218/' target='_blank' className={style.linkedin}> 
+                    <a href='https://www.linkedin.com/in/denis-sinisterra-9bb49b218/' target='_blank' rel='noreferrer' className={style.linkedin}> 
                         <FaLinkedin /> 
                     </a>
 
-                    <a href='https://github.com/DSinisterra' target='_blank' className={style.github}> 
+                    <a href='https://github.com/DSinisterra' target='_blank' rel='noreferrer' className={style.github}> 
                         <FaGithub /> 
                     </a>
                 </div>

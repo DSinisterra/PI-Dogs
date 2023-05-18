@@ -43,7 +43,7 @@ const CardsContainer = () => {
 
    useEffect(() => {
       dispatch(getDogs());
-   }, []);
+   }, [dispatch]);
 
 
    return (
@@ -67,7 +67,7 @@ const CardsContainer = () => {
          </ul>
          
          <div className={style.pages}>
-            <button onClick={currentPage - 1 ? () => setCurrentPage(currentPage - 1) : ''} disabled={currentPage === 1}>
+            <button onClick={currentPage - 1 ? () => setCurrentPage(currentPage - 1) : undefined} disabled={currentPage === 1}>
                ◄
             </button>
             {pagesToShow.map((page) => {
@@ -82,7 +82,7 @@ const CardsContainer = () => {
                );
             })}
 
-            <button onClick={pages.includes(currentPage) ? () => setCurrentPage(currentPage + 1) : ''} disabled={currentPage === pages}>
+            <button onClick={pages.includes(currentPage) ? () => setCurrentPage(currentPage + 1) : undefined} disabled={currentPage === pages}>
                ►
             </button>
          </div>
