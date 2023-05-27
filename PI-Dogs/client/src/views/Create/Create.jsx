@@ -128,7 +128,7 @@ const Create = () => {
                         ) )}
                     </div>
                     <br />
-                    <button type="submit" className={style.submitButton}>Submit</button>
+                    <button type="submit" className={style.submitButton}>Submit 🐾</button>
             </form>
         </>
     )
